@@ -14,5 +14,21 @@ arch('annotations')
     ->toHavePropertiesDocumented()
     ->toHaveMethodsDocumented();
 
-// Laravel Feature and Unit tests are expected to extend TestCase
-// This is the proper Laravel testing pattern
+arch('no PhpUnit tests in test directories')
+    ->expect(function () {
+        $finder = Finder::create()
+            ->in(['tests/Feature', 'tests/Unit'])
+            ->files()
+            ->name('*.php');
+
+        $files = [];
+        foreach ($finder as $file) {
+            $content = file_get_contents($file->getRealPath());
+            if (preg_match('/class\s+\w+\s+extends\s+(Tests\\\\)?TestCase/', $content)) {
+                $files[] = $file->getRealPath();
+            }
+        }
+
+        return $files;
+    })
+    ->toBeEmpty();

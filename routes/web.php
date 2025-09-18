@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\GameController;
+use App\Http\Controllers\RockPaperScissorsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -11,8 +11,8 @@ Route::get('/health-check', function () {
     ]);
 })->name('health-check');
 
-// Paper-Rock-Scissors Game Routes
-Route::controller(GameController::class)->group(function () {
+// Rock Paper Scissors game routes
+Route::controller(RockPaperScissorsController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::post('/play', 'store')->name('game.play');
     Route::delete('/reset', 'destroy')->name('game.reset');

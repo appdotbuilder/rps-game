@@ -22,7 +22,7 @@ class PlayGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'choice' => 'required|in:rock,paper,scissors',
+            'choice' => 'required|string|in:rock,paper,scissors',
         ];
     }
 
@@ -34,7 +34,7 @@ class PlayGameRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'choice.required' => 'Please select rock, paper, or scissors.',
+            'choice.required' => 'Please make a choice to play.',
             'choice.in' => 'Invalid choice. Please select rock, paper, or scissors.',
         ];
     }
